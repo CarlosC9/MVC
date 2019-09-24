@@ -21,17 +21,11 @@ public class Conexion {
     
     private Connection con;
     
-    public Conexion() {
-        try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            String sUrl = "jdbc:mysql://localhost:3306/libros?serverTimezone=CET";
-            this.con = DriverManager.getConnection(sUrl, "root", "elrincon1920");
-            JOptionPane.showMessageDialog(null, "Conectado!!!!");
-
-        } catch (SQLException ex) {
-            this.con = null;
-            throw new RuntimeException("Error con la conexión!!!");
-        }
+    public Conexion() throws SQLException {
+        
+        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+        String sUrl = "jdbc:mysql://localhost:3306/libros?serverTimezone=CET";
+        this.con = DriverManager.getConnection(sUrl, "root", "elrincon1920");
         
     }
 

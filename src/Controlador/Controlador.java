@@ -11,6 +11,13 @@ import Vista.JFAlumnos;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,10 +29,23 @@ public class Controlador {
     private AlumnoDAO modelo;
     private JFAlumnos vista;
 
-    public Controlador(Conexion conexion, AlumnoDAO modelo, JFAlumnos vista) {
-        this.conexion = conexion;
-        this.modelo = new AlumnoDAO(this.conexion);
+    public Controlador() {
         this.vista = new JFAlumnos();
+        try {
+            this.conexion = new Conexion();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this.vista, "No se puede conectar con la base de datos","Error",JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
+        }
+        this.modelo = new AlumnoDAO(this.conexion);
+        try {
+            VistaTabla vTabla = new VistaTabla(modelo.obtenerTodosLosAlumnos());
+            this.vista.getTablaAlumnos().setModel(vTabla);
+        } catch (SQLException ex) {
+            
+        }
+        this.actionListeners();
+       
     }
     
     public void actionListeners() {
@@ -48,6 +68,53 @@ public class Controlador {
         });
         
         
+        
+        
+    }
+    
+    class VistaTabla extends AbstractTableModel{
+        ResultSet _rs;
+        ResultSetMetaData md; //contiene información sobre la estructura de un ResulSet,especialmente sobre sus nom campos
+        int _numColumnas;
+        int _numFilas;
+
+        public VistaTabla(ResultSet rs){
+          this._rs=rs;
+          try{
+              md=rs.getMetaData();
+              _rs.last();
+              _numFilas=_rs.getRow();
+              _numColumnas=md.getColumnCount();
+
+          }
+          catch( SQLException ex){
+          }
+        }
+        @Override
+        public int getRowCount() {
+            return _numFilas;
+
+        }
+
+        @Override
+        public int getColumnCount() {
+            return _numColumnas;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+              try {
+                _rs.absolute(rowIndex+1);
+                Object o=_rs.getObject(columnIndex +1);
+                return o;
+            }
+            catch (SQLException ex){
+                return ex.toString();
+            }
+
+        }
+    
+    
     }
     
 }

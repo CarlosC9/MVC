@@ -17,6 +17,18 @@ public class JFAlumnos extends JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtApellido1;
+    private javax.swing.JTextField txtApellido2;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRegistro;
+    // End of variables declaration
 
     public JTable getTablaAlumnos() {
         return TablaAlumnos;
@@ -57,18 +69,7 @@ public class JFAlumnos extends JFrame {
     public JTextField getTxtRegistro() {
         return txtRegistro;
     }
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtApellido1;
-    private javax.swing.JTextField txtApellido2;
-    private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtRegistro;
-    // End of variables declaration   
+       
     
     public JFAlumnos() {
         

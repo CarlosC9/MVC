@@ -2,7 +2,7 @@
 
 package biblioteca;
 
-import Vista.JFAlumnos;
+import Controlador.Controlador;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Biblioteca {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        new Controlador();
     }
     
 }
