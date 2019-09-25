@@ -28,5 +28,15 @@ public class AlumnoDAO {
         return rs;
     }
     
+    public void eliminarAlumno(String registro) throws SQLException {
+        Statement stament = this.conexion.getConexion().createStatement();
+        
+        int numeroCambios = stament.executeUpdate("delete from alumnos where registro=" + registro);
+        
+        if (numeroCambios < 1) {
+            throw new SQLException();
+        }
+    }
+    
     
 }

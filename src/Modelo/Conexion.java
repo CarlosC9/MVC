@@ -19,18 +19,18 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
     
-    private Connection con;
+    private Connection connector;
     
     public Conexion() throws SQLException {
         
         DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-        String sUrl = "jdbc:mysql://localhost:3306/libros?serverTimezone=CET";
-        this.con = DriverManager.getConnection(sUrl, "root", "elrincon1920");
+        String sUrl = "jdbc:mysql://localhost:3306/libros?useTimezone=true&serverTimezone=CET";
+        this.connector = DriverManager.getConnection(sUrl, "root", "elrincon1920");
         
     }
 
     public Connection getConexion() {
-        return con;
+        return connector;
     }
     
     

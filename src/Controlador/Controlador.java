@@ -8,6 +8,8 @@ package Controlador;
 import Modelo.AlumnoDAO;
 import Modelo.Conexion;
 import Vista.JFAlumnos;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTable;
@@ -48,10 +50,10 @@ public class Controlador {
        
     }
     
-    public void actionListeners() {
+    private void actionListeners() {
         
         
-        vista.getTablaAlumnos().addMouseListener(new MouseAdapter() {
+        this.vista.getTablaAlumnos().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JTable tabla = vista.getTablaAlumnos();
@@ -65,6 +67,18 @@ public class Controlador {
                 vista.getTxtApellido2().setText(String.valueOf(tabla.getValueAt(fila, 4)));
             }
             
+        });
+        
+        vista.getBtnBajas().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    modelo.eliminarAlumno(vista.getTxtRegistro().getText());
+                    JOptionPane.showMessageDialog(vista, "Se ha dado de baja al registro " + vista.getTxtRegistro().getText() + " con exito","Finalizado",JOptionPane.INFORMATION_MESSAGE);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(vista, "Error al intentar dar de baja","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
         });
         
         
