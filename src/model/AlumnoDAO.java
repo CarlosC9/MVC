@@ -15,7 +15,7 @@ public class AlumnoDAO {
         this.conexion = conexion;
     }
     
-    //Gets all the data of all the students in the database and return result
+    
     public ResultSet obtenerTodosLosAlumnos() throws SQLException {
         ResultSet rs = null;
         
@@ -25,7 +25,7 @@ public class AlumnoDAO {
         return rs;
     }
     
-    //Deletes student depending on the registry number
+    
     public void eliminarAlumno(String registro) throws SQLException {
         
         String sql = "delete from alumnos where registro=" + registro;
@@ -37,7 +37,7 @@ public class AlumnoDAO {
         }
     }
     
-    //Modifies student with data received depending on the registry number
+    
     public void modificarAlumno(String registro,String dni, String nombre,String apellido1,String apellido2) throws SQLException {
         String sql = "update alumnos set dni='" + dni + "', nombre='" + nombre + "', "
         + "apellido1='" + apellido1 + "', apellido2='" + apellido2 + "' "
@@ -50,7 +50,7 @@ public class AlumnoDAO {
         }
     }
     
-    // 
+    
     private int ejecutarSQLActualizacion(String sql) throws SQLException {
         Statement stament = this.conexion.getConexion().createStatement();
         
