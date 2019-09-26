@@ -13,8 +13,8 @@ public class Conexion {
     public Conexion() throws SQLException {
         
         DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-        String sUrl = "jdbc:mysql://localhost:3306/libros?useTimezone=true&serverTimezone=CET";
-        this.connector = DriverManager.getConnection(sUrl, "root", "elrincon1920");
+        String urlDatabase = "jdbc:mysql://localhost:3306/libros?useTimezone=true&serverTimezone=CET";
+        this.connector = DriverManager.getConnection(urlDatabase, "root", "elrincon1920");
         
     }
 
