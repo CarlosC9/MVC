@@ -27,7 +27,6 @@ public class AlumnoDAO {
     
     //Deletes student depending on the registry number
     public void eliminarAlumno(String registro) throws SQLException {
-        Statement stament = this.conexion.getConexion().createStatement();
         
         String sql = "delete from alumnos where registro=" + registro;
         
