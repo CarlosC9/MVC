@@ -17,12 +17,12 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Controlador {
     
-    //Conector, View and Model
+    
     private Conexion conexion;
     private AlumnoDAO modelo;
     private JFAlumnos vista;
 
-    //Initializes view, conector and model. Also creates listeners
+    
     public Controlador() {
         
         this.vista = new JFAlumnos();
@@ -41,10 +41,10 @@ public class Controlador {
     }
     
     
-    //Define the events
+    
     private void createListeners() {
         
-        //When user clicks a row, The TextViews show the data of the selected row
+        
         this.vista.getTablaAlumnos().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -61,8 +61,8 @@ public class Controlador {
             
         });
         
-        //When user clicks the deregister button, The database deletes the record written on "regitro" TextView
-        this.vista.getBtnBajas().addActionListener((ActionEvent arg0) -> {
+        
+        this.vista.getBtnBajaRegistro().addActionListener((ActionEvent arg0) -> {
             try {
                 modelo.eliminarAlumno(vista.getTxtRegistro().getText());
                 this.refrescarDatosTabla();
@@ -73,9 +73,9 @@ public class Controlador {
             }
         });
         
-        /*When user clicks the modify button, The database modify the record written on "regitro" TextView
-        with data written on the remaining Textviews*/
-        this.vista.getBtnModificaciones().addActionListener((ActionEvent arg0) -> {
+        
+        this.vista.getBtnModificarRegistro().addActionListener((ActionEvent arg0) -> {
+            
             String registro = vista.getTxtRegistro().getText();
             String dni = vista.getTxtDni().getText();
             String nombre = vista.getTxtNombre().getText();
@@ -90,35 +90,36 @@ public class Controlador {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(vista, "Error al intentar modificar","Error",JOptionPane.ERROR_MESSAGE);
             }
+            
         });
         
-        // When user clicks the exit button, The program ends
+        
         this.vista.getBtnSalir().addActionListener((ActionEvent arg0) -> {
             System.exit(EXIT_ON_CLOSE);
         });
         
     }
     
-    // Refresh the table data
+    
     private void refrescarDatosTabla() throws SQLException {
         VistaTabla vTabla = new VistaTabla(modelo.obtenerTodosLosAlumnos());
         vista.getTablaAlumnos().setModel(vTabla);
     }
     
-    // Model to be added to the table for shows data
+    
     class VistaTabla extends AbstractTableModel{
-        ResultSet _rs;
-        ResultSetMetaData md; //contiene información sobre la estructura de un ResulSet,especialmente sobre sus nom campos
-        int _numColumnas;
-        int _numFilas;
+        ResultSet rs;
+        ResultSetMetaData md; 
+        int numColumnas;
+        int numFilas;
 
         public VistaTabla(ResultSet rs){
-          this._rs=rs;
+          this.rs=rs;
           try{
               md=rs.getMetaData();
-              _rs.last();
-              _numFilas=_rs.getRow();
-              _numColumnas=md.getColumnCount();
+              this.rs.last();
+              numFilas=this.rs.getRow();
+              numColumnas=md.getColumnCount();
 
           }
           catch( SQLException ex){
@@ -126,20 +127,20 @@ public class Controlador {
         }
         @Override
         public int getRowCount() {
-            return _numFilas;
+            return numFilas;
 
         }
 
         @Override
         public int getColumnCount() {
-            return _numColumnas;
+            return numColumnas;
         }
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             try {
-                _rs.absolute(rowIndex+1);
-                Object o=_rs.getObject(columnIndex +1);
+                rs.absolute(rowIndex+1);
+                Object o=rs.getObject(columnIndex +1);
                 return o;
             }
             catch (SQLException ex){

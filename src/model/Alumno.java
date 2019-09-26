@@ -1,6 +1,6 @@
 package model;
 
-//This class serves to instantiate "Alumno" with personal data
+
 public class Alumno {
     
     private String registro;
@@ -9,12 +9,12 @@ public class Alumno {
     private String apellido1;
     private String apellido2;
     
-    //Contructor without initialize data
+    
     public Alumno() {
         
     }
 
-    //Contructor without initialize data
+    
     public Alumno(String registro, String dni, String nombre, String apellido1, String apellido2) {
         this.registro = registro;
         this.dni = dni;
@@ -23,7 +23,7 @@ public class Alumno {
         this.apellido2 = apellido2;
     }
 
-    //Getter and Setters
+    
     public String getRegistro() {
         return registro;
     }
