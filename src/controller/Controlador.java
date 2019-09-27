@@ -13,6 +13,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import model.Alumno;
 
 
 public class Controlador {
@@ -33,7 +34,7 @@ public class Controlador {
             this.refrescarDatosTabla();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this.vista, "No se puede conectar con la base de datos","Error",JOptionPane.ERROR_MESSAGE);
-            System.exit(-1);
+            System.exit(0);
         }
         
         this.createListeners();
@@ -82,8 +83,10 @@ public class Controlador {
             String apellido1 = vista.getTxtApellido1().getText();
             String apellido2 = vista.getTxtApellido2().getText();
             
+            Alumno alumnoModificado = new Alumno(registro,dni, nombre, apellido1, apellido2);
+            
             try {
-                modelo.modificarAlumno(registro, dni, nombre, apellido1, apellido2);
+                modelo.modificarAlumno(alumnoModificado);
                 this.refrescarDatosTabla();
                 JOptionPane.showMessageDialog(vista, "Se ha modificado el registro " 
                         + vista.getTxtRegistro().getText() + " con exito","Finalizado",JOptionPane.INFORMATION_MESSAGE);
@@ -95,7 +98,7 @@ public class Controlador {
         
         
         this.vista.getBtnSalir().addActionListener((ActionEvent arg0) -> {
-            System.exit(EXIT_ON_CLOSE);
+            System.exit(0);
         });
         
     }

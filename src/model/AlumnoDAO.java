@@ -38,10 +38,10 @@ public class AlumnoDAO {
     }
     
     
-    public void modificarAlumno(String registro,String dni, String nombre,String apellido1,String apellido2) throws SQLException {
-        String sql = "update alumnos set dni='" + dni + "', nombre='" + nombre + "', "
-        + "apellido1='" + apellido1 + "', apellido2='" + apellido2 + "' "
-        + "where registro=" + registro;
+    public void modificarAlumno(Alumno alumnoModificado) throws SQLException {
+        String sql = "update alumnos set dni='" + alumnoModificado.getDni() + "', nombre='" + alumnoModificado.getNombre() + "', "
+        + "apellido1='" + alumnoModificado.getApellido1() + "', apellido2='" + alumnoModificado.getApellido2() + "' "
+        + "where registro=" + alumnoModificado.getRegistro();
         
         int numeroCambios = ejecutarSQLActualizacion(sql);
         
